@@ -1,0 +1,14 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+./vscode/
+./.vscode/
+./.idea/
+./.vs/
+./.vscode/
+./.vscode/*
+./.idea/*
+./.vs/*
+./.vscode/*
+./.idea/*
+./.vs/*

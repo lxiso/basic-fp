@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://ci5kvfos2c54y"]
+
+[ext_resource type="Script" uid="uid://3q7cggniuy1a" path="res://Scenes/Scripts/GameManager.cs" id="1_bsxja"]
+[ext_resource type="Texture2D" uid="uid://dqkeevu1avcew" path="res://Scenes/Assets/Textures/Prototype/texture_08.png" id="1_gqx2w"]
+[ext_resource type="PackedScene" uid="uid://bbjgd268xgopu" path="res://Entities/Player/PlayerController.tscn" id="2_qsb0u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qsb0u"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_bsxja"]
+sky_material = SubResource("ProceduralSkyMaterial_qsb0u")
+
+[sub_resource type="Environment" id="Environment_dl6we"]
+background_mode = 2
+sky = SubResource("Sky_bsxja")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsb0u"]
+albedo_texture = ExtResource("1_gqx2w")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[node name="Root" type="Node3D" unique_id=280455824]
+
+[node name="GameManager" type="Node" parent="." unique_id=2097041373]
+process_mode = 3
+script = ExtResource("1_bsxja")
+debugMode = true
+
+[node name="UI" type="Control" parent="." unique_id=458101113]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="DebugMargin" type="MarginContainer" parent="UI" unique_id=337390959]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 53.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Debug" type="VBoxContainer" parent="UI/DebugMargin" unique_id=1559988713]
+layout_mode = 2
+
+[node name="CurrentState" type="Label" parent="UI/DebugMargin/Debug" unique_id=1261672059]
+layout_mode = 2
+text = "Current state: "
+
+[node name="Velocity" type="Label" parent="UI/DebugMargin/Debug" unique_id=328671246]
+layout_mode = 2
+text = "Velocity: "
+
+[node name="Position" type="Label" parent="UI/DebugMargin/Debug" unique_id=1666418357]
+layout_mode = 2
+text = "Position:"
+
+[node name="TestScene" type="Node3D" parent="." unique_id=1197197132]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="TestScene" unique_id=1234224023]
+environment = SubResource("Environment_dl6we")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TestScene" unique_id=1406764708]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="LevelGeometry" type="CSGCombiner3D" parent="TestScene" unique_id=1071812772]
+material_override = SubResource("StandardMaterial3D_qsb0u")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TestScene/LevelGeometry" unique_id=1542021927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(30, 1, 30)
+
+[node name="PlayerController" parent="TestScene" unique_id=817278959 instance=ExtResource("2_qsb0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.151896, 0, -0.03406036)
+
+[editable path="TestScene/PlayerController"]

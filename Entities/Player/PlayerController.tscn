@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bbjgd268xgopu"]
+
+[ext_resource type="Script" uid="uid://db7vtpk6xpeko" path="res://Entities/Player/Scripts/PlayerController.cs" id="1_tsbpy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_li1bg"]
+radius = 0.4
+height = 1.7
+
+[node name="PlayerController" type="CharacterBody3D" unique_id=817278959]
+script = ExtResource("1_tsbpy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=494420592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_li1bg")
+
+[node name="Head" type="Marker3D" parent="." unique_id=1414992578]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1244852796]
