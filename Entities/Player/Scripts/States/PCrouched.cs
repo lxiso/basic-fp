@@ -1,12 +1,15 @@
+using System;
 using Godot;
 
-public partial class PGrounded : PState
+public partial class PCrouched : PState
 {
     private Vector2 _inputDirection = Vector2.Zero;
     private float _currentSpeed = 0f;
+    private CapsuleShape3D _shape;
 
     public void EnterState(PlayerController player)
     {
+        _shape = player.collisionShape.Shape as CapsuleShape3D;
         GD.Print($"{player.Name} entered {player.currentState.GetType().Name} State");
     }
 
@@ -27,20 +30,20 @@ public partial class PGrounded : PState
             player.targetVelocity.Y = player.jumpVelocity;
         }
 
-        if (@event.IsActionPressed("move_crouch"))
+        if (@event.IsActionPressed("move_crouch") && !player.crouchCheck.IsColliding())
         {
-            player.ChangeState(new PCrouched());
+            player.ChangeState(new PGrounded());
         }
     }
 
     public void PhysicsUpdate(PlayerController player, float delta)
     {
-        player.CalculateHeight(player.defaultHeight);
+        player.CalculateHeight(player.crouchHeight);
 
         _inputDirection = Input.GetVector("move_left", "move_right", "move_forward", "move_back").Normalized();
         player.inputDir.X = _inputDirection.X;
         player.inputDir.Z = _inputDirection.Y;
-        _currentSpeed = Input.IsActionPressed("move_run") ? player.walkSpeed * player.runMultiplier : player.walkSpeed;
+        _currentSpeed = player.walkSpeed * player.crouchMultiplier;
         player.targetVelocity.X = _inputDirection.X * _currentSpeed;
         player.targetVelocity.Z = _inputDirection.Y * _currentSpeed;
         player.targetVelocity = player.targetVelocity.Rotated(Vector3.Up, player.Rotation.Y);
