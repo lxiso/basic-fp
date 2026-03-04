@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://3q7cggniuy1a" path="res://Scenes/Scripts/GameManager.cs" id="1_bsxja"]
 [ext_resource type="Texture2D" uid="uid://dqkeevu1avcew" path="res://Scenes/Assets/Textures/Prototype/texture_08.png" id="1_gqx2w"]
 [ext_resource type="PackedScene" uid="uid://bbjgd268xgopu" path="res://Entities/Player/PlayerController.tscn" id="2_qsb0u"]
+[ext_resource type="Script" uid="uid://cqhehydi5x5yj" path="res://Scenes/Components/Scripts/DamageArea.cs" id="4_dl6we"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qsb0u"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,6 +24,16 @@ albedo_texture = ExtResource("1_gqx2w")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bsxja"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dl6we"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dl6we"]
+transparency = 4
+albedo_color = Color(1, 0.23921569, 0.3254902, 0.50980395)
+albedo_texture = ExtResource("1_gqx2w")
+uv1_triplanar = true
+
 [node name="Root" type="Node3D" unique_id=280455824]
 
 [node name="GameManager" type="Node" parent="." unique_id=2097041373]
@@ -32,10 +43,32 @@ debugMode = true
 
 [node name="UI" type="Control" parent="." unique_id=458101113]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
+
+[node name="InfoMargin" type="MarginContainer" parent="UI" unique_id=931280954]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 61.0
+grow_vertical = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="InfoContainer" type="VBoxContainer" parent="UI/InfoMargin" unique_id=453378430]
+layout_mode = 2
+
+[node name="Health" type="Label" parent="UI/InfoMargin/InfoContainer" unique_id=838237628]
+layout_mode = 2
+text = "Health: "
 
 [node name="DebugMargin" type="MarginContainer" parent="UI" unique_id=337390959]
 layout_mode = 1
@@ -107,3 +140,20 @@ size = Vector3(1, 1.0681152, 4.037842)
 
 [node name="PlayerController" parent="TestScene" unique_id=817278959 instance=ExtResource("2_qsb0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.151896, 0, -0.03406036)
+mouseSens = 0.1
+walkBob = 0.1
+runBob = 0.15
+crouchBob = 0.2
+
+[node name="DamageArea" type="Area3D" parent="TestScene" unique_id=1838347872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350563, 0.5047977, 3.0761614)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_dl6we")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestScene/DamageArea" unique_id=859123445]
+shape = SubResource("BoxShape3D_bsxja")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestScene/DamageArea" unique_id=1120774638]
+mesh = SubResource("BoxMesh_dl6we")
+surface_material_override/0 = SubResource("StandardMaterial3D_dl6we")

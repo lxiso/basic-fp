@@ -7,6 +7,8 @@ public partial class PGrounded : PState
 
     public void EnterState(PlayerController player)
     {
+        player.currentBob = player.walkBob;
+        player.currentBobFreq = player.walkBobFreq;
         GD.Print($"{player.Name} entered {player.currentState.GetType().Name} State");
     }
 
@@ -41,6 +43,7 @@ public partial class PGrounded : PState
         player.inputDir.X = _inputDirection.X;
         player.inputDir.Z = _inputDirection.Y;
         _currentSpeed = Input.IsActionPressed("move_run") ? player.walkSpeed * player.runMultiplier : player.walkSpeed;
+        if (Input.IsActionPressed("move_run")) player.currentBobFreq = player.runBobFreq; else player.currentBobFreq = player.walkBobFreq;
         player.targetVelocity.X = _inputDirection.X * _currentSpeed;
         player.targetVelocity.Z = _inputDirection.Y * _currentSpeed;
         player.targetVelocity = player.targetVelocity.Rotated(Vector3.Up, player.Rotation.Y);
@@ -53,6 +56,6 @@ public partial class PGrounded : PState
 
     public void Update(PlayerController player, float delta)
     {
-        // Handle general updates specific to grounded state
+        
     }
 }

@@ -12,6 +12,7 @@ public partial class GameManager : Node
     private Label currentState;
     private Label velocity;
     private Label position;
+    private Label health;
 
     public bool isPaused = false;
 
@@ -27,6 +28,7 @@ public partial class GameManager : Node
             currentState = root.FindChild("CurrentState") as Label;
             velocity = root.FindChild("Velocity") as Label;
             position = root.FindChild("Position") as Label;
+            health = root.FindChild("Health") as Label;
         }
 
         Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -49,6 +51,7 @@ public partial class GameManager : Node
         if (player == null) return;
         
         playerPosition = player.GlobalPosition;
+        PlayerInfo();
 
         if (playerPosition.Y < maxFallHeight)
         {
@@ -68,6 +71,11 @@ public partial class GameManager : Node
     {
         isPaused = !isPaused;
         GetTree().Paused = GetTree().Paused ? false : true;
+    }
+
+    public void PlayerInfo()
+    {
+        health.Text = $"Health: {player.GetHealth()}";
     }
 
     public void Debug()
