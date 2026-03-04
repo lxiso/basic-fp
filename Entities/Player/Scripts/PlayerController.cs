@@ -31,6 +31,10 @@ public partial class PlayerController : CharacterBody3D
     [Export] public float walkBobFreq = 2f;
     [Export] public float runBobFreq = 6f;
     [Export] public float crouchBobFreq = 5f;
+    [Export] public bool isLazyCameraOn = true;
+    [Export] public float lazyCameraSmooth = 15f;
+    private float _lastGlobalY;
+    private float _verticalOffset = 0f;
     public float currentBobFreq;
     public float currentBob;
     private double _bobTimer = 0f;
@@ -64,6 +68,7 @@ public partial class PlayerController : CharacterBody3D
         currentDamageCooldown = damageCooldown;
         NodeSetup();
         CalculateHeight(defaultHeight);
+        _lastGlobalY = GlobalPosition.Y;
         ChangeState(new PGrounded());
     }
 
@@ -72,6 +77,23 @@ public partial class PlayerController : CharacterBody3D
         currentState?.ExitState(this);
         currentState = newState;
         currentState?.EnterState(this);
+    }
+
+    public void LazyCamera(double delta)
+    {
+        if (isLazyCameraOn)
+        {
+            float currentGlobalY = GlobalPosition.Y;
+            float deltaY = currentGlobalY - _lastGlobalY;
+
+            _verticalOffset -= deltaY;
+            _verticalOffset = Mathf.Lerp(_verticalOffset, 0f, (float)delta * lazyCameraSmooth);
+
+            Vector3 newHeadPos = head.Position;
+            newHeadPos.Y += _verticalOffset;
+            head.Position = newHeadPos;
+            _lastGlobalY = currentGlobalY;
+        }
     }
 
     public void TakeDamage(float amount)
@@ -184,6 +206,7 @@ public partial class PlayerController : CharacterBody3D
         ApplyVelocity();
         CalculateTilt(delta);
         CalculateBob(delta);
+        LazyCamera(delta);
         MoveAndSlide();
     }
 

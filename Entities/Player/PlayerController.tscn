@@ -9,8 +9,13 @@ height = 1.7
 [sub_resource type="SphereShape3D" id="SphereShape3D_tsbpy"]
 radius = 0.4
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_tsbpy"]
+margin = 0.1
+length = 0.6
+
 [node name="PlayerController" type="CharacterBody3D" unique_id=817278959]
 collision_layer = 2
+floor_snap_length = 0.5
 script = ExtResource("1_tsbpy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=494420592]
@@ -24,3 +29,7 @@ shape = SubResource("CapsuleShape3D_li1bg")
 [node name="CrouchCheck" type="ShapeCast3D" parent="." unique_id=820196154]
 shape = SubResource("SphereShape3D_tsbpy")
 target_position = Vector3(0, 1.3, 0)
+
+[node name="FrontStair" type="CollisionShape3D" parent="." unique_id=911104638]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.6, -0.598)
+shape = SubResource("SeparationRayShape3D_tsbpy")

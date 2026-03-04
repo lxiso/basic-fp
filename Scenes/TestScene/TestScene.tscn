@@ -138,12 +138,29 @@ size = Vector3(1, 2.0249023, 2.9907227)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.622541, 2.4959135, -4.03148)
 size = Vector3(1, 1.0681152, 4.037842)
 
+[node name="CSGBox3D9" type="CSGBox3D" parent="TestScene/LevelGeometry" unique_id=1003729542]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.623, 0, -4.031)
+size = Vector3(1, 1, 4.038)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="TestScene/LevelGeometry" unique_id=252884296]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.623, 0.20498657, -5.031)
+size = Vector3(1, 1.4099731, 4.038)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="TestScene/LevelGeometry" unique_id=508656932]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.623, 0.40911865, -6.031)
+size = Vector3(1, 1.8182373, 4.038)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="TestScene/LevelGeometry" unique_id=1563247601]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.623, 0.5961914, -7.031)
+size = Vector3(1, 2.1923828, 4.038)
+
 [node name="PlayerController" parent="TestScene" unique_id=817278959 instance=ExtResource("2_qsb0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.151896, 0, -0.03406036)
 mouseSens = 0.1
 walkBob = 0.1
 runBob = 0.15
 crouchBob = 0.2
+isLazyCameraOn = false
 
 [node name="DamageArea" type="Area3D" parent="TestScene" unique_id=1838347872]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350563, 0.5047977, 3.0761614)
