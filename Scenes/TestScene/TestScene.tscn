@@ -34,6 +34,18 @@ albedo_color = Color(1, 0.23921569, 0.3254902, 0.50980395)
 albedo_texture = ExtResource("1_gqx2w")
 uv1_triplanar = true
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_dl6we"]
+size = Vector2(1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dl6we"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3lok"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_dl6we")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w3lok"]
+size = Vector3(1, 0.01, 1)
+
 [node name="Root" type="Node3D" unique_id=280455824]
 
 [node name="GameManager" type="Node" parent="." unique_id=2097041373]
@@ -174,3 +186,31 @@ shape = SubResource("BoxShape3D_bsxja")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestScene/DamageArea" unique_id=1120774638]
 mesh = SubResource("BoxMesh_dl6we")
 surface_material_override/0 = SubResource("StandardMaterial3D_dl6we")
+
+[node name="InteractiveScreen" type="Node3D" parent="TestScene" unique_id=198804908]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.6481907, 1.4059951, -0.97588676)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestScene/InteractiveScreen" unique_id=801338292]
+mesh = SubResource("PlaneMesh_dl6we")
+surface_material_override/0 = SubResource("StandardMaterial3D_w3lok")
+
+[node name="Area3D" type="Area3D" parent="TestScene/InteractiveScreen" unique_id=261576463]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestScene/InteractiveScreen/Area3D" unique_id=59089726]
+shape = SubResource("BoxShape3D_w3lok")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TestScene/InteractiveScreen" unique_id=2125847782]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="TestScene/InteractiveScreen/SubViewportContainer" unique_id=1643820377]
+size = Vector2i(1024, 600)
+
+[node name="Scene" type="Control" parent="TestScene/InteractiveScreen/SubViewportContainer/SubViewport" unique_id=1054978933]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
