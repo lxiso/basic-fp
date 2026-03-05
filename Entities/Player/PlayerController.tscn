@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bbjgd268xgopu"]
 
 [ext_resource type="Script" uid="uid://db7vtpk6xpeko" path="res://Entities/Player/Scripts/PlayerController.cs" id="1_tsbpy"]
+[ext_resource type="PackedScene" uid="uid://c1fbps4w52g74" path="res://Entities/Player/Components/PickRay/PickRay.tscn" id="2_2dhvu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_li1bg"]
 radius = 0.4
@@ -13,7 +14,7 @@ radius = 0.4
 margin = 0.1
 length = 0.6
 
-[node name="PlayerController" type="CharacterBody3D" unique_id=817278959]
+[node name="PlayerController" type="CharacterBody3D" unique_id=817278959 groups=["Player"]]
 collision_layer = 2
 floor_snap_length = 0.5
 script = ExtResource("1_tsbpy")
@@ -25,6 +26,8 @@ shape = SubResource("CapsuleShape3D_li1bg")
 [node name="Head" type="Marker3D" parent="." unique_id=1414992578]
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1244852796]
+
+[node name="PickRay" parent="Head/Camera3D" unique_id=556427262 instance=ExtResource("2_2dhvu")]
 
 [node name="CrouchCheck" type="ShapeCast3D" parent="." unique_id=820196154]
 shape = SubResource("SphereShape3D_tsbpy")

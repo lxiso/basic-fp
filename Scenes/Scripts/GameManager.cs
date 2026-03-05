@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Godot;
 
 public partial class GameManager : Node
@@ -71,6 +70,7 @@ public partial class GameManager : Node
     {
         isPaused = !isPaused;
         GetTree().Paused = GetTree().Paused ? false : true;
+        if (Input.MouseMode == Input.MouseModeEnum.Captured) Input.MouseMode = Input.MouseModeEnum.Visible; else Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
     public void PlayerInfo()

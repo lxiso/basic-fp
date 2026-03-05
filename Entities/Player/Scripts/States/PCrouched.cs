@@ -12,12 +12,11 @@ public partial class PCrouched : PState
         player.currentBob = player.crouchBob;
         player.currentBobFreq = player.crouchBobFreq;
         _shape = player.collisionShape.Shape as CapsuleShape3D;
-        GD.Print($"{player.Name} entered {player.currentState.GetType().Name} State");
     }
 
     public void ExitState(PlayerController player)
     {
-        GD.Print($"{player.Name} exited {player.currentState.GetType().Name} State");
+        
     }
 
     public void HandleInput(PlayerController player, InputEvent @event)

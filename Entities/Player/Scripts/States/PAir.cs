@@ -7,12 +7,12 @@ public partial class PAir : PState
 
     public void EnterState(PlayerController player)
     {
-        GD.Print($"{player.Name} entered {player.currentState.GetType().Name} State");
+        
     }
 
     public void ExitState(PlayerController player)
     {
-        GD.Print($"{player.Name} exited {player.currentState.GetType().Name} State");
+        
     }
 
     public void HandleInput(PlayerController player, InputEvent @event)

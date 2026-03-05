@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c1fbps4w52g74"]
+
+[ext_resource type="Script" uid="uid://cf03mobrmkgae" path="res://Entities/Player/Components/PickRay/PickRay.cs" id="1_ee8wc"]
+
+[node name="PickRay" type="RayCast3D" unique_id=556427262]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+target_position = Vector3(0, 0, -2.5)
+script = ExtResource("1_ee8wc")
+springStiffness = 60.0

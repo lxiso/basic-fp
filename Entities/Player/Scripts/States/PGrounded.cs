@@ -9,12 +9,11 @@ public partial class PGrounded : PState
     {
         player.currentBob = player.walkBob;
         player.currentBobFreq = player.walkBobFreq;
-        GD.Print($"{player.Name} entered {player.currentState.GetType().Name} State");
     }
 
     public void ExitState(PlayerController player)
     {
-        GD.Print($"{player.Name} exited {player.currentState.GetType().Name} State");
+        
     }
 
     public void HandleInput(PlayerController player, InputEvent @event)

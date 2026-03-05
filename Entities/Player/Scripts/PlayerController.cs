@@ -44,6 +44,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] public float defaultHeight = 1.7f;
     [Export] public float crouchHeight = 0.85f;
     [Export] public bool isGravityEnabled = true;
+    [Export] public float cameraFov = 90f;
     public bool isLerping = true;
     public Vector3 targetVelocity = Vector3.Zero;
     private Vector3 _currentVelocity = Vector3.Zero;
@@ -53,6 +54,7 @@ public partial class PlayerController : CharacterBody3D
     public void NodeSetup()
     {
         camera = FindChild("Camera3D") as Camera3D;
+        camera.Fov = cameraFov;
         head = FindChild("Head") as Marker3D;
         collisionShape = FindChild("CollisionShape3D") as CollisionShape3D;
 
